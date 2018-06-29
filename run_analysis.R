@@ -1,4 +1,4 @@
-#path <- paste("local folder path")
+#path <- paste("local dir")
 
 allfiles <- list.files(path, recursive = TRUE)
 #read train data
@@ -36,4 +36,5 @@ mn_std_act_data <- merge(mn_std_data, act_lab, by = "ActivityID", all.x = TRUE)
 #Tidy data
 tidy_data <- aggregate(.~SubjectID + ActivityID + Activity, mn_std_act_data, mean)
 tidy_data <- tidy_data[order(tidy_data$SubjectID, tidy_data$ActivityID, tidy_data$Activity),]
-
+#Output to a text file
+write.table(tidy_data,"SamHAR.txt", row.names = FALSE)
